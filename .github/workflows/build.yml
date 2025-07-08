@@ -1,0 +1,33 @@
+on:
+  workflow_dispatch: {}
+  push: {}
+jobs:
+  build:
+    permissions:
+      contents: read
+      packages: write
+    runs-on: ubuntu-24.04-arm
+    steps:
+    - uses: actions/checkout@v4
+    - uses: redhat-actions/buildah-build@v2
+      with:
+        tags: 42
+        image: oneplus6-gmanka-niri
+        containerfiles: niri.Containerfile
+        build-args: |
+          base_image=quay.io/pocketblue/oneplus6-gnome-mobile:42
+    - uses: redhat-actions/buildah-build@v2
+      with:
+        tags: 42 latest
+        image: oneplus6-gmanka
+        containerfiles: other.Containerfile
+        build-args: |
+          base_image=localhost/oneplus6-gmanka-niri:42
+    - uses: redhat-actions/push-to-registry@v2
+      with:
+        tags: 42 latest
+        image: oneplus6-gmanka
+        registry: ghcr.io/gmankab
+        username: gmankab
+        password: ${{ secrets.GITHUB_TOKEN }}
+
