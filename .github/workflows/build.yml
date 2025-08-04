@@ -11,22 +11,15 @@ jobs:
     - uses: actions/checkout@v4
     - uses: redhat-actions/buildah-build@v2
       with:
-        tags: 42
-        image: oneplus6-gmanka-niri
-        containerfiles: niri.Containerfile
-        build-args: |
-          base_image=quay.io/pocketblue/oneplus6-gnome-mobile:42
-    - uses: redhat-actions/buildah-build@v2
-      with:
         tags: 42 latest
-        image: oneplus6-gmanka
-        containerfiles: other.Containerfile
+        image: mipad5-gmanka
+        containerfiles: Containerfile
         build-args: |
-          base_image=localhost/oneplus6-gmanka-niri:42
+          base_image=quay.io/pocketblue/mipad5-gnome-desktop:42
     - uses: redhat-actions/push-to-registry@v2
       with:
         tags: 42 latest
-        image: oneplus6-gmanka
+        image: mipad5-gmanka
         registry: ghcr.io/gmankab
         username: gmankab
         password: ${{ secrets.GITHUB_TOKEN }}
