@@ -7,6 +7,6 @@ RUN dnf -y remove \
         kernel-core \
         kernel-modules \
         kernel-modules-core
-RUN dnf -y install kernel-6.16.0-1.sm8150.fc42
+RUN dnf -y install kernel-6.16.0-2.sm8150.fc42
 RUN dnf -y install fish tmux wl-clipboard distrobox brightnessctl NetworkManager-tui fastfetch
 RUN dnf clean all
